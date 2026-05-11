@@ -45,7 +45,20 @@
       margin-bottom : 150px; 
    }
    
-   /* .menu td > .${ menu_id } { background-color : #04AA6D; } */  
+   #paging > table  {
+      width : 60%;
+      margin : 0 auto;
+      td {
+         border:1px solid red;
+         background-color:white;
+         color: white;
+         a {
+            display:block;
+         	text-decoration: none;
+         }         
+      }
+   
+   }
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -69,7 +82,9 @@
 
 	    <tr>
 	      <td  colspan="5">
-	       [<a href="/Board/WriteForm?menu_id=${ menu_id }">새 글 등록</a>]&nbsp;&nbsp;&nbsp; 
+	       [<a href="/BoardPaging/WriteForm?menu_id=${menu_id}&nowpage=${nowpage}">
+	       새 글 등록
+	       </a>]&nbsp;&nbsp;&nbsp; 
 	       [<a href="/">Home</a>] 
 	      </td>
 	    </tr>
