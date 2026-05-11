@@ -9,13 +9,17 @@ import org.springframework.web.servlet.ModelAndView;
 import com.green.board.dto.BoardDto;
 import com.green.menus.dto.MenuDTO;
 import com.green.menus.mapper.MenuMapper;
+import com.green.paging.mapper.BoardPagingMapper;
 
 @Controller
 @RequestMapping("/BoardPaging")
 public class BoardPagingController {
 
 	@Autowired
-	private  MenuMapper  menuMapper;
+	private  MenuMapper         menuMapper;
+	
+	@Autowired
+	private  BoardPagingMapper  boardPagingMapper; 
 
 	
 	// /BoardPaging/List?menu_id=MENU01&nowpage=1
@@ -23,16 +27,22 @@ public class BoardPagingController {
 	public  ModelAndView   list( BoardDto boardDto, int nowpage ) {
 		
 		// 메뉴목록 : menus.jsp 용
-		List<MenuDTO>  menuList   =  menuMapper.getMenuList();
+		List<MenuDTO>  menuList =  menuMapper.getMenuList();
 		
 		// 게시물 목록 조회(페이징해서)
 		// 해당 메뉴의 자료갯수 : 
-		//int  count = 
+		int            totalCount    =  boardPagingMapper.count( boardDto );  // menu_id
+		System.out.println("totalCount:" + totalCount);
 		
-		ModelAndView   mv  =  new ModelAndView();
+		
+		
+		String         menu_id  =  boardDto.getMenu_id(); 
+		ModelAndView   mv       =  new ModelAndView();
 		mv.setViewName("boardpaging/list");	
 		mv.addObject("menuList", menuList);
 		mv.addObject("nowpage",  nowpage);
+				
+		mv.addObject("menu_id",  menu_id);  // 현재 메뉴정보
 		
 		return  mv;		
 	}
