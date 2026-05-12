@@ -117,12 +117,12 @@
           <a href="/BoardPaging/WriteForm?menu_id=${board.menu_id}&nowpage=${nowpage}" 
               class="btn btn-primary">새글쓰기</a>
           
-          <%-- <c:if test="${ sessionScope.login.userid eq board.writer }"> --%>
+          <c:if test="${ sessionScope.login.userid eq board.writer }">
           <a href="/BoardPaging/UpdateForm?idx=${board.idx}&menu_id=${board.menu_id}&nowpage=${nowpage}" 
              class="btn btn-warning">수정</a>
           <a href="/BoardPaging/Delete?idx=${board.idx}&menu_id=${board.menu_id}&nowpage=${nowpage}" 
             class="btn btn-danger">삭제</a>
-          <%-- </c:if> --%>
+          </c:if>
           
           <a href="/BoardPaging/List?menu_id=${board.menu_id}&nowpage=${nowpage}" class="btn btn-info">목록</a>
           <a href="/" class="btn btn-success">Home</a>

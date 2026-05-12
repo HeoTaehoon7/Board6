@@ -192,12 +192,14 @@ public class UserController {
 	public  String   login( UserDto userDto, 
 			HttpServletRequest request ) {
 		
-		UserDto      user     =  userMapper.getUser( userDto );
-		
-		HttpSession  session  =  request.getSession();
+		UserDto      user       =  userMapper.getUser( userDto );
+				
+		HttpSession  session    =  request.getSession();
 		session.setAttribute("login", user);
 		
-		return  "redirect:/Board/List?menu_id=MENU01";
+		String       loc        =  session.getAttribute("loc") + "";  
+	
+		return  "redirect:" + loc;
 		
 	}
 	
