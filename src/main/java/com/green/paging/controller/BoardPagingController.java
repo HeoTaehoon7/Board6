@@ -28,15 +28,17 @@ public class BoardPagingController {
 
   
 	// /BoardPaging/List?menu_id=MENU01&nowpage=1
+	// /BoardPaging/List?menu_id=MENU01&nowpage=3&searchType=&keyword=
+	// /BoardPaging/List?menu_id=MENU01&nowpage=3&searchType=title&keyword=11
 	@RequestMapping("/List")
 	public  ModelAndView   list( BoardDto boardDto, int nowpage, 
-			String  searchType, String keyword ) {
+			String  searchType, String keyword ) {  
 		
-		// 천체메뉴목록 : menus.jsp 용
+		// 전체메뉴목록 : menus.jsp 용
 		List<MenuDTO>  menuList =  menuMapper.getMenuList();
 		
 		// 게시물 목록 조회(페이징해서)
-		// 해당 메뉴의 자료갯수 : 
+		// 해당 메뉴의 자료갯수 : 조회된 
 		int            totalCount   
             =  boardPagingMapper.count( boardDto, searchType, keyword );  // menu_id
 		System.out.println("totalCount:" + totalCount);
@@ -47,7 +49,6 @@ public class BoardPagingController {
 		searchDto.setNumOfRows(10);      // 한페이지에 출력될 자료수
 		searchDto.setPageSize(10);       
 		  // paging.jsp 에 한줄에 출력될 페이지 번호 수 : 처음 이전 1 2 3 ... 10 다음 마지막
-				
 		
 		// Pagination 설정
 		Pagination   pagination  =  new Pagination(totalCount, searchDto);
@@ -80,6 +81,48 @@ public class BoardPagingController {
 		return  mv;		
 	}
 	
+	// /BoardPaging/View?idx=208&menu_id=MENU01&nowpage=1
+	@RequestMapping("/View")
+	public   ModelAndView   view( BoardDto boardDto, int nowpage  ) {
+		
+		// 메뉴목록 조회
+		List<MenuDTO>  menuList  =  menuMapper.getMenuList();
+		
+		// idx 로 게시글 한 개 조회
+		BoardDto       board     =  boardPagingMapper.getBoard( boardDto  );
+		
+		String         menu_id   =  boardDto.getMenu_id();
+				
+		ModelAndView  mv  =  new ModelAndView();
+		mv.setViewName("boardpaging/view");
+		mv.addObject("menuList", menuList );
+		
+		mv.addObject("menu_id",  menu_id  );
+		mv.addObject("nowpage",  nowpage  );
+		
+		mv.addObject("board",    board );
+			
+		return  mv;
+	}
+	
 	// /BoardPaging/WriteForm?menu_id=MENU01&nowpage=1
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
