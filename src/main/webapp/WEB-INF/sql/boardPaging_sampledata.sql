@@ -1,3 +1,4 @@
+-- menu_id 별로 sample data 200 건씩 생성해준다 
 INSERT INTO BOARD (
       IDX
     , MENU_ID
