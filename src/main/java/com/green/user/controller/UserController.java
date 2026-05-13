@@ -189,10 +189,11 @@ public class UserController {
 		
 	// 로그인 /Users/Login , userid=, passwd=
 	@RequestMapping("/Login")
-	public  String   login( UserDto userDto, 
-			HttpServletRequest request ) {
+	public  String   login( 
+			UserDto             userDto, 
+			HttpServletRequest  request ) {
 		
-		UserDto      user       =  userMapper.getUser( userDto );
+		UserDto      user       =  userMapper.getLogin( userDto );
 				
 		HttpSession  session    =  request.getSession();
 		session.setAttribute("login", user);
