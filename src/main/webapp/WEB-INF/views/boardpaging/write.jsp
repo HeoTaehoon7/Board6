@@ -47,8 +47,8 @@
   <main>
     <%@include file="/WEB-INF/include/menuspaging.jsp" %>  
   
-    <h2 class="h2"><b id="mname">${ menu_name }</b> 새 글 쓰기</h2>
-    <form  action="/BoardPaging/Write" method="post">
+    <h2 class="h2"><b id="mname">${ menu_name }</b> 게시글 수정</h2>
+    <form  action="/BoardPaging/Update" method="post">
      <input type="hidden" name="menu_id" value="${ menu_id }" />
      <input type="hidden" name="nowpage" value="${ nowpage }" />
      <table id="table1">
